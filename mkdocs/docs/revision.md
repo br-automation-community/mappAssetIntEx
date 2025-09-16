@@ -1,6 +1,11 @@
+#### 16.09.2026
+
+* Update project to AS6
+
 #### 14.01.2025
 
 Version 1.2
+
 * Check remanent backup data against structure version to avoid data corruption
 
 #### 20.12.2024
