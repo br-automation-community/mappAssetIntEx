@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<?AutomationStudio Version=4.12.7.113 FileVersion="4.9"?>
+<?AutomationStudio WorkingVersion="6.3" FileVersion="4.9"?>
 <Hardware xmlns="http://br-automation.co.at/AS/Hardware">
-  <Module Name="X20CP3687X" Type="X20CP3687X" Version="1.8.0.0">
+  <Module Name="X20CP3687X" Type="X20CP3687X" Version="1.8.2.0">
     <Connector Name="IF2">
       <Parameter ID="ActivateDevice" Value="1" />
       <Group ID="Vnc1" />
@@ -30,12 +30,13 @@
     <Group ID="FileDevice2" />
     <Parameter ID="FileDeviceName2" Value="USER_HD" />
     <Parameter ID="FileDevicePath2" Value="F:\" />
+    <Parameter ID="ActivateFtpServer" Value="1" />
     <Group ID="FtpUser1" />
     <Parameter ID="FtpUsername1" Value="admin" />
     <Parameter ID="FtpUserPassword1" Value="WA9hSMBXiqkZliudaf2dLB8I5WaEURjKd6F9iexMfBQ=" />
     <Parameter ID="FtpUserSalt1" Value="wS51ak4d" />
     <Parameter ID="FTPAccessRight1" Value="0" />
-    <Parameter ID="ActivateOpcUa" Value="1" />
-    <Parameter ID="OpcUaInformationModels_PV_Version" Value="1" />
+    <Parameter ID="ActivateWebServer" Value="1" />
+    <Parameter ID="ActivateSdm" Value="1" />
   </Module>
 </Hardware>

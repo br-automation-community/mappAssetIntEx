@@ -38,12 +38,5 @@ PROGRAM _INIT
 
 	exAssetIntConfig.Export.Timeline := TRUE;
 	exAssetIntConfig.Export.TimelineFileNamePattern := 'Timeline_%Y_%m_%d_%H_%M.csv';
-	
-	// --------------------------------------------------------------------------------------------------------------------------
-	// Check if we are running in simuulation
-	IF DiagCpuIsARsim() THEN
-		DeviceName := 'ARsim';
-	ELSE
-		DeviceName := 'USER_HD';
-	END_IF
+
 END_PROGRAM
