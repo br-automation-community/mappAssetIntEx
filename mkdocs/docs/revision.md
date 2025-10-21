@@ -1,14 +1,22 @@
-#### 16.09.2026
+#### 21.10.2025 
+
+Version 1.3
+
+* Fix division by zero when record number is 0
+* Fix enum memory violation
+* Fix dir create after error reset
+
+#### 16.09.2025
 
 * Update project to AS6
 
-#### 14.01.2025
+#### 14.01.2025 
 
 Version 1.2
 
 * Check remanent backup data against structure version to avoid data corruption
 
-#### 20.12.2024
+#### 20.12.2024 
 
 Version 1.1
 
