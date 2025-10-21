@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------------------------
-// File version 1004
+// File version 1005
 // -------------------------------------------------------------------------------------------
 // Job UI function block
 FUNCTION_BLOCK exAssetIntJobListUI
@@ -33,7 +33,7 @@ FUNCTION_BLOCK exAssetIntJobListUI
 				brsmemset(ADR(Info.Diag), 0, SIZEOF(Info.Diag));
 				Error := FALSE;
 				StatusID := ERR_OK;
-				Internal.SortingStartTimeOld := UDINT_TO_DINT(16#FFFFFFFF);
+				Internal.SortingStartTimeOld := exASSETINT_SORTING_ASC;
 				
 				// Reset filter settings
 				exAssetIntFilterReset(ADR(UIConnect.Filter));
@@ -158,7 +158,7 @@ FUNCTION_BLOCK exAssetIntShiftListUI
 				// Reset error and status
 				Error := FALSE;
 				StatusID := ERR_OK;
-				Internal.SortingStartTimeOld := UDINT_TO_DINT(16#FFFFFFFF);
+				Internal.SortingStartTimeOld := exASSETINT_SORTING_ASC;
 				
 				// Reset filter settings
 				exAssetIntFilterReset(ADR(UIConnect.Filter));				
@@ -284,7 +284,7 @@ FUNCTION_BLOCK exAssetIntTimelineUI
 				// Reset error and status
 				Error := FALSE;
 				StatusID := ERR_OK;
-				Internal.SortingStartTimeOld := UDINT_TO_DINT(16#FFFFFFFF);
+				Internal.SortingStartTimeOld := exASSETINT_SORTING_ASC;
 				
 				// Reset filter settings
 				exAssetIntFilterReset(ADR(UIConnect.Filter));		
@@ -357,7 +357,9 @@ FUNCTION_BLOCK exAssetIntTimelineUI
 					UIConnect.Output.ProductionState[Internal.x] := UDINT_TO_UINT(Internal.RecordData.EventType) - 2;
 					UIConnect.Output.Duration[Internal.x] := Internal.RecordData.TotalTime;
 					UIConnect.Output.Reason[Internal.x] := Internal.RecordData.AdditionalData;
-					UIConnect.Output.DurationBar[Internal.x].Duration := REAL_TO_UDINT(UDINT_TO_REAL(Internal.TimeSeconds)/UDINT_TO_REAL(Internal.TimeLongest)*100);
+					IF Internal.TimeLongest > 0 THEN
+						UIConnect.Output.DurationBar[Internal.x].Duration := REAL_TO_UDINT(UDINT_TO_REAL(Internal.TimeSeconds)/UDINT_TO_REAL(Internal.TimeLongest)*100);
+					END_IF
 					
 					IF Internal.RecordData.EventType = RecordTypeUptime THEN
 						UIConnect.Output.DurationBar[Internal.x].Color := 2;
@@ -465,6 +467,11 @@ END_FUNCTION
 // Handle list scrolling
 FUNCTION exAssetIntScrollListUI
 	exAssetIntScrollListUI := State;
+	
+	// Nothing to do
+	IF RecordCount = 0 THEN
+		RETURN;
+	END_IF
 	
 	// -------------------------------------------------------------------------------------------
 	// Handle page up and down
