@@ -1,4 +1,4 @@
-(*File Version 1007*)
+(*File Version 1008*)
 (*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*)
 (*Internal type*)
 
@@ -389,7 +389,8 @@ TYPE
 		exASSETINT_STATE_NO_SHIFT_ACTIVE := 0, (*Inactive state*)
 		exASSETINT_STATE_UPTIME := 1, (*Uptime state*)
 		exASSETINT_STATE_SCHDL_DOWNTIME := 2, (*Scheduled downtime state*)
-		exASSETINT_STATE_UNSCH_DOWNTIME := 3 (*Unscheduled downtime state*)
+		exASSETINT_STATE_UNSCH_DOWNTIME := 3, (*Unscheduled downtime state*)
+		exASSETINT_STATE_USER_CHANGE := 4 (*User change*)
 		);
 	exAssetIntUICurrDTFilterType : 	STRUCT 
 		Enable : BOOL; (*Enable Filter*)
