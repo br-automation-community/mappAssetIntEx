@@ -78,5 +78,6 @@
     <LibraryObject Name="ashw" Source="" Memory="UserROM" Language="Binary" Debugging="true" />
     <LibraryObject Name="AsIODiag" Source="Libraries.AsIODiag.lby" Memory="UserROM" Language="binary" Debugging="true" />
     <LibraryObject Name="exAssetInt" Source="exAssetInt.exAssetInt.lby" Memory="UserROM" Language="IEC" Debugging="true" />
+    <LibraryObject Name="IecCheck" Source="Libraries.IecCheck.lby" Memory="UserROM" Language="IEC" Debugging="true" />
   </Libraries>
 </SwConfiguration>
