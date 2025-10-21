@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------------------------
-// File version 1011
+// File version 1012
 // -------------------------------------------------------------------------------------------
 // Core function block
 FUNCTION_BLOCK exAssetIntCore
@@ -76,6 +76,8 @@ FUNCTION_BLOCK exAssetIntCore
 				Internal.WriteEventData(Enable := FALSE);
 				Internal.ReadEventData(Enable := FALSE);
 				Internal.WriteEventData(Enable := FALSE);
+				Internal.DirCreate_0.enable := FALSE;
+				Internal.DirCreate_0();
 				
 				// Update time information
 				Internal.CurrentTime(enable := TRUE);
