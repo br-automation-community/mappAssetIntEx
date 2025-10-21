@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <?AutomationStudio FileVersion="4.9"?>
 <Package xmlns="http://br-automation.co.at/AS/Package">
   <Objects>
@@ -17,5 +17,6 @@
     <Object Type="Library" Language="Binary" Description="Core library for mapp components">MpBase</Object>
     <Object Type="Library" Language="Binary" Description="Asset intensity measurement">MpAssetInt</Object>
     <Object Type="Library" Language="Binary" Description="Data recording and archiving">MpData</Object>
+    <Object Type="Library" Language="IEC">IecCheck</Object>
   </Objects>
 </Package>
