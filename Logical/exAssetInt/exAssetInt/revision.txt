@@ -6,6 +6,7 @@ Version 1.4
 - Fix out of bounds write in ReadConfiguration: file size was not checked against the configuration structure before reading (memory corruption on mismatched/old configuration file)
 - Fix out of bounds write in InsertEventData: RecordCount was not capped against CORE_EVENT_NUM_MAX before inserting into the record buffer, more than 500 valid event files would write past the buffer (memory corruption)
 - Fix UINT underflow in exAssetIntScrollListUI: RecordCount - ListMaxCount wrapped around to a large positive value when there were fewer entries than the list page size, bypassing the RecordStart < 0 correction and causing an out of bounds read when rendering the list
+- Fix missing null termination in NormalizeDateTime: the LREAL return value was used as a string buffer without being zeroed first, so a following brsstrlen/brsstrcat during export could read past the return value and overflow the export buffer
 
 Version 1.3
 - Fix division by zero when record number is 0
