@@ -457,7 +457,7 @@ FUNCTION exAssetIntCheckPreq
 		RETURN;				
 	END_IF
 	// Make sure we have temporary buffer
-	IF exLink.MemoryDb = 0 OR exLink.MemoryJob = 0 OR exLink.MemoryTimeline = 0 THEN
+	IF exLink.MemoryDb = 0 OR exLink.MemoryJob = 0 OR exLink.MemoryShift = 0 OR exLink.MemoryTimeline = 0 THEN
 		// Set status, remember state, go to error state
 		StatusID := CreateErrorState(ERR_ASSET_TEMP_MEMORY, ADR('ERR: no temp memory'), Logger, exCOM_SEV_ERROR,  ADR(State), ADR(InfoDiagStatusID));
 		exAssetIntCheckPreq := FALSE;
