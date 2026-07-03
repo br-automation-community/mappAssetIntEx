@@ -612,11 +612,18 @@ FUNCTION_BLOCK exAssetIntCore
 
 				// Link data does not exist
 			ELSIF Internal.ReadLinkData.Status = fiERR_FILE_NOT_FOUND  THEN
-				CreateLoggerEntry(exASSETINT_LOG_INFO, ADR('no backup file found'), Logger);				
+				CreateLoggerEntry(exASSETINT_LOG_INFO, ADR('no backup file found'), Logger);
 
 				StatusID := ERR_OK;
 				Internal.State := exASSETINT_STATE_INIT_2;
-			
+
+				// Backup was corrupt (wrong size or version), it has already been deleted by ReadLinkData - start fresh
+			ELSIF Internal.ReadLinkData.Status = ERR_ASSET_LINK_SIZE OR Internal.ReadLinkData.Status = ERR_ASSET_LINK_VERSION THEN
+				CreateLoggerEntry(exASSETINT_LOG_INFO, ADR('corrupt backup file removed, starting fresh'), Logger);
+
+				StatusID := ERR_OK;
+				Internal.State := exASSETINT_STATE_INIT_2;
+
 				// Error
 			ELSIF Internal.ReadLinkData.Status <> ERR_FUB_BUSY THEN
 				// Set status, remember state, go to error state
