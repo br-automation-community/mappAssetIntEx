@@ -371,6 +371,16 @@ FUNCTION_BLOCK ExportEventData
 				State := 5;
 			END_IF
 
+			// No export line generated for this record/event type in current export mode.
+			// Skip this record so the state machine cannot stall in step 4.
+			IF State = 4 THEN
+				IF idx > 0 THEN
+					idx := idx - 1;
+				ELSE
+					State := 6;
+				END_IF
+			END_IF
+
 		// -------------------------------------------------------------------------------------------
 		// Write data
 		// -------------------------------------------------------------------------------------------
