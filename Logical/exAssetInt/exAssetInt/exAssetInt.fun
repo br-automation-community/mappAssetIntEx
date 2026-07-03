@@ -263,6 +263,7 @@ FUNCTION_BLOCK ReadEventData
 		LastEntryRecord : UINT;
 		TmpStr1 : STRING[100];
 		FileIndex : UINT;
+		FileIndexCheck : DINT;
 		NextFileNameGet : BOOL;
 		NextFileNameReady : BOOL;
 		Override : {REDUND_UNREPLICABLE} USINT;

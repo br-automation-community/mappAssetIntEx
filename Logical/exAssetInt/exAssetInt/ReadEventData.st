@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------------------------
-// File version 1002
+// File version 1003
 // -------------------------------------------------------------------------------------------
 // Read event data
 // -------------------------------------------------------------------------------------------
@@ -276,17 +276,32 @@ FUNCTION_BLOCK ReadEventData
 		
 		// New file found
 		IF DirReadEx_0.status = ERR_OK AND FileInfo_0.Mode = fiFILE THEN
-			IF brsstrcmp(ADR(FileInfo_0.Filename), ADR('.')) <> 0 AND brsstrcmp(ADR(FileInfo_0.Filename), ADR('..')) <> 0 THEN			
-				// Generate log entry
-				TmpStr1 := 'found file > ';
-				brsstrcat(ADR(TmpStr1), ADR(FileInfo_0.Filename));
-				CreateLoggerEntry(exASSETINT_LOG_ALL, ADR(TmpStr1), Logger);
+			IF brsstrcmp(ADR(FileInfo_0.Filename), ADR('.')) <> 0 AND brsstrcmp(ADR(FileInfo_0.Filename), ADR('..')) <> 0 THEN
+				// Check file name matches the expected 'event#<index>' pattern, everything else does not belong in this folder
+				IF brsmemcmp(ADR(FileInfo_0.Filename), ADR('event#'), 6) = 0 AND brsstrlen(ADR(FileInfo_0.Filename)) > 6 THEN
+					FileIndexCheck := brsatoi(ADR(FileInfo_0.Filename) + 6);
+				ELSE
+					FileIndexCheck := -1;
+				END_IF
 
-				DirReadEx_0.enable := FALSE;
-				DirReadEx_0();
+				IF FileIndexCheck < 0 OR FileIndexCheck > UINT_TO_DINT(CORE_EVENT_NUM_MAX) THEN
+					// Unexpected file in event folder, report it and skip without opening
+					TmpStr1 := 'ERR: unexpected file in event folder, skipping > ';
+					brsstrcat(ADR(TmpStr1), ADR(FileInfo_0.Filename));
+					CreateLoggerEntry(exASSETINT_LOG_ERROR, ADR(TmpStr1), Logger);
+					StatusRead := ERR_ASSET_READ_FILE_NAME;
+				ELSE
+					// Generate log entry
+					TmpStr1 := 'found file > ';
+					brsstrcat(ADR(TmpStr1), ADR(FileInfo_0.Filename));
+					CreateLoggerEntry(exASSETINT_LOG_ALL, ADR(TmpStr1), Logger);
 
-				NextFileNameGet := FALSE;
-				NextFileNameReady := TRUE;
+					DirReadEx_0.enable := FALSE;
+					DirReadEx_0();
+
+					NextFileNameGet := FALSE;
+					NextFileNameReady := TRUE;
+				END_IF
 			END_IF
 	
 		// No more entries
