@@ -143,7 +143,7 @@ FUNCTION_BLOCK CreateMemory
 		MemoryJob : UDINT;
 		MemoryShift : UDINT;
 		MemoryTimeline : UDINT;
-		Status : UINT;
+		Status : DINT;
 	END_VAR
 	VAR
 		DatObjCreate_0 : DatObjCreate;
@@ -163,7 +163,7 @@ FUNCTION_BLOCK ReadConfiguration
 		Configuration : exAssetIntCoreConfigType;
 	END_VAR
 	VAR_OUTPUT
-		Status : UINT;
+		Status : DINT;
 	END_VAR
 	VAR
 		FileOpen_0 : FileOpen;
@@ -181,7 +181,7 @@ FUNCTION_BLOCK WriteConfiguration
 		Configuration : exAssetIntCoreConfigType;
 	END_VAR
 	VAR_OUTPUT
-		Status : UINT;
+		Status : DINT;
 	END_VAR
 	VAR
 		FileCreate_0 : FileCreate;
@@ -222,7 +222,7 @@ FUNCTION_BLOCK WriteLinkData
 		Link : REFERENCE TO exAssetIntLinkType;
 	END_VAR
 	VAR_OUTPUT
-		Status : UINT;
+		Status : DINT;
 	END_VAR
 	VAR
 		FileCreate_0 : FileCreate;
