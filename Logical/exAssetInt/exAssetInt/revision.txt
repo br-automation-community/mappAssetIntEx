@@ -1,4 +1,5 @@
 Version 1.4
+- Fix uninitialized function local DiffTime in TrackShiftChange: on most cyclic calls it held stack garbage, occasionally triggering a false shift change that reset the shift statistics and created events every cycle
 - Fix uninitialized function locals: exAssetIntBufferUI (RecordCount, y) wrote with undefined offset into the UI buffer memory (memory corruption)
 - Fix uninitialized function return values in FindInstr and CalcCrc
 - Fix out of bounds write to RecordIndexUsed: index parsed from event file name was used without range check (ReadEventData and core store event)
