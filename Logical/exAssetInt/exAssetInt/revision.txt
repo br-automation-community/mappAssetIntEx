@@ -1,4 +1,5 @@
 Version 1.4
+- Fix %M placeholder in ExportEventData: file name and export row timestamps replaced %M with the month value instead of the minute (4 occurrences), so the minute was never exported and the month appeared twice
 - Fix ExportEventData off-by-one: the newest record (idx 0) was decremented past/overwritten before being written, so it was always missing from the job/shift/timeline CSV export
 - Fix uninitialized function local DiffTime in TrackShiftChange: on most cyclic calls it held stack garbage, occasionally triggering a false shift change that reset the shift statistics and created events every cycle
 - Fix uninitialized function locals: exAssetIntBufferUI (RecordCount, y) wrote with undefined offset into the UI buffer memory (memory corruption)
