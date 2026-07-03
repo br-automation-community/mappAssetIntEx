@@ -13,7 +13,6 @@ nav:
   - Conversion: conversion/conversion.md
   - FAQs: faq/faq.md
   - Appendix: appendix.md
-  - Test Cases: testcases.md
   - Revision: revision.md
 
 theme:
