@@ -2,6 +2,7 @@ Version 1.5
 - Fix CreateLoggerEntry robustness: LastMsg was an uninitialized function local compared against stack garbage while the log buffer was still empty; the ring buffer move used length LOG_LEN*(LOG_NUM-1) at a stride of LOG_LEN+1 (STRING[100] occupies 101 bytes), leaving stale bytes in the oldest entry; oversized log messages overwrote the caller's message buffer and were dropped entirely instead of being logged with a local truncated copy; removed a dead duplicate brsitoa(day) call
 - Fix exAssetIntCheckPreq missing MemoryShift null check: the shift list UI could pass a 0 pointer into exAssetIntBufferUI when only MemoryDb/MemoryJob/MemoryTimeline were checked
 - Fix exAssetIntFilterListUI: DT_TO_DTStructure_0.second and .millisec were never set before converting the filter dialog date to a DT value, so the From/Until filter boundaries were shifted by whatever stack garbage happened to be in those fields
+- Reset RecordStart when entering STATE_UI_BUFFER in exAssetIntJobListUI, exAssetIntShiftListUI and exAssetIntTimelineUI: a filter or sort change could leave RecordStart beyond the newly filtered record count, showing an empty list even though matching data existed
 
 Version 1.4
 - Fix out of bounds read in exAssetIntTimelineUI bar graph prescan: the loop ran inclusive to RecordCount and added RecordStart to the index, reading up to hundreds of KB past the timeline buffer once the list was scrolled; now bounded the same way as the sibling display loop (UI_TIMELINE_IDX page size, RecordStart + index < RecordCount)
