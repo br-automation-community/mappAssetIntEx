@@ -582,14 +582,18 @@ FUNCTION exAssetIntFilterListUI
 			DT_TO_DTStructure_0.day := Filter.Dialog.From.Day;
 			DT_TO_DTStructure_0.hour := Filter.Dialog.From.Hour;
 			DT_TO_DTStructure_0.minute := Filter.Dialog.From.Minute;
+			DT_TO_DTStructure_0.second := 0;
+			DT_TO_DTStructure_0.millisec := 0;
 			Filter.Current.From.DateTime := DTStructure_TO_DT(ADR(DT_TO_DTStructure_0));
 			Filter.Current.From.Enable := Filter.Dialog.From.Enable;
-	
+
 			DT_TO_DTStructure_0.year := Filter.Dialog.Until.Year;
 			DT_TO_DTStructure_0.month := Filter.Dialog.Until.Month;
 			DT_TO_DTStructure_0.day := Filter.Dialog.Until.Day;
 			DT_TO_DTStructure_0.hour := Filter.Dialog.Until.Hour;
 			DT_TO_DTStructure_0.minute := Filter.Dialog.Until.Minute;
+			DT_TO_DTStructure_0.second := 0;
+			DT_TO_DTStructure_0.millisec := 0;
 			Filter.Current.Until.DateTime := DTStructure_TO_DT(ADR(DT_TO_DTStructure_0));
 			Filter.Current.Until.Enable := Filter.Dialog.Until.Enable;
 	
