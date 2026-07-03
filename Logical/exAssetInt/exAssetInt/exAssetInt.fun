@@ -430,6 +430,7 @@ FUNCTION CreateLoggerEntry : USINT
 		RtcGettime : RTCtime_typ;
 		TmpStr : STRING[20];
 		LastMsg : STRING[LOG_LEN];
+		TmpMsg : STRING[LOG_LEN];
 	END_VAR
 END_FUNCTION
 
