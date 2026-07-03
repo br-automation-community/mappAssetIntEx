@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------------------------
-// File version 1002
+// File version 1003
 // -------------------------------------------------------------------------------------------
 // Read event data
 // -------------------------------------------------------------------------------------------
@@ -368,16 +368,9 @@ FUNCTION_BLOCK ExportEventData
 				
 				brsstrcat(ADR(Buffer), ADR('$R'));
 
-				State := 5;			
+				State := 5;
 			END_IF
 
-			// Increase counter
-			IF idx = 0 THEN
-				State := 6;
-			ELSE
-				idx := idx - 1;
-			END_IF
-			
 		// -------------------------------------------------------------------------------------------
 		// Write data
 		// -------------------------------------------------------------------------------------------
@@ -400,8 +393,9 @@ FUNCTION_BLOCK ExportEventData
 				// Remember offset
 				Offset := Offset + FileWrite_0.len;
 				
-				// Go to next step
+				// Go to next step - process the next lower index, or finish once index 0 has been written
 				IF idx > 0 THEN
+					idx := idx - 1;
 					State := 4;
 				ELSE
 					State := 6;
