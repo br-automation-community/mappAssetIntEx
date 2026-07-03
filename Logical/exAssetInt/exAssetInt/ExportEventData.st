@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------------------------
-// File version 1003
+// File version 1004
 // -------------------------------------------------------------------------------------------
 // Read event data
 // -------------------------------------------------------------------------------------------
@@ -88,7 +88,7 @@ FUNCTION_BLOCK ExportEventData
 			ReplaceDateTime(ADR(FileName), ADR('%Y'), RtcGettime.year);
 			
 			ReplaceDateTime(ADR(FileName), ADR('%S'), RtcGettime.second);				
-			ReplaceDateTime(ADR(FileName), ADR('%M'), RtcGettime.month);
+			ReplaceDateTime(ADR(FileName), ADR('%M'), RtcGettime.minute);
 			ReplaceDateTime(ADR(FileName), ADR('%H'), RtcGettime.hour);
 
 			idx := RecordCount - 1;
@@ -185,7 +185,7 @@ FUNCTION_BLOCK ExportEventData
 				ReplaceDateTime(ADR(TmpStr1), ADR('%m'), DTStructure_0.month);
 				ReplaceDateTime(ADR(TmpStr1), ADR('%Y'), DTStructure_0.year);
 				ReplaceDateTime(ADR(TmpStr1), ADR('%S'), DTStructure_0.second);				
-				ReplaceDateTime(ADR(TmpStr1), ADR('%M'), DTStructure_0.month);
+				ReplaceDateTime(ADR(TmpStr1), ADR('%M'), DTStructure_0.minute);
 				ReplaceDateTime(ADR(TmpStr1), ADR('%H'), DTStructure_0.hour);
 
 				brsstrcat(ADR(Buffer), ADR(TmpStr1));
@@ -198,7 +198,7 @@ FUNCTION_BLOCK ExportEventData
 				ReplaceDateTime(ADR(TmpStr1), ADR('%m'), DTStructure_0.month);
 				ReplaceDateTime(ADR(TmpStr1), ADR('%Y'), DTStructure_0.year);
 				ReplaceDateTime(ADR(TmpStr1), ADR('%S'), DTStructure_0.second);				
-				ReplaceDateTime(ADR(TmpStr1), ADR('%M'), DTStructure_0.month);
+				ReplaceDateTime(ADR(TmpStr1), ADR('%M'), DTStructure_0.minute);
 				ReplaceDateTime(ADR(TmpStr1), ADR('%H'), DTStructure_0.hour);
 
 				brsstrcat(ADR(Buffer), ADR(TmpStr1));
@@ -322,7 +322,7 @@ FUNCTION_BLOCK ExportEventData
 				ReplaceDateTime(ADR(TmpStr1), ADR('%m'), DTStructure_0.month);
 				ReplaceDateTime(ADR(TmpStr1), ADR('%Y'), DTStructure_0.year);
 				ReplaceDateTime(ADR(TmpStr1), ADR('%S'), DTStructure_0.second);				
-				ReplaceDateTime(ADR(TmpStr1), ADR('%M'), DTStructure_0.month);
+				ReplaceDateTime(ADR(TmpStr1), ADR('%M'), DTStructure_0.minute);
 				ReplaceDateTime(ADR(TmpStr1), ADR('%H'), DTStructure_0.hour);
 
 				brsstrcat(ADR(Buffer), ADR(TmpStr1));
