@@ -3,6 +3,7 @@ Version 1.4
 - Fix uninitialized function return values in FindInstr and CalcCrc
 - Fix out of bounds write to RecordIndexUsed: index parsed from event file name was used without range check (ReadEventData and core store event)
 - Reject files in the event folder that do not match the 'event#<index>' name pattern before opening them, log an error instead of processing them
+- Fix out of bounds write in ReadConfiguration: file size was not checked against the configuration structure before reading (memory corruption on mismatched/old configuration file)
 
 Version 1.3
 - Fix division by zero when record number is 0
