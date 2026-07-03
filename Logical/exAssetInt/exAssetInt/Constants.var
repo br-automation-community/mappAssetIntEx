@@ -1,4 +1,4 @@
-(*File Version 1004*)
+(*File Version 1005*)
 (*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*)
 (*General constants*)
 (*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*)
@@ -53,6 +53,7 @@ VAR CONSTANT
 	ERR_ASSET_INF_WAIT_CORE_FB : DINT := 1083346949; (*This component can only become active if MpAssetIntCore is active.*)
 	ERR_ASSET_READ_RECORD_SIZE : DINT := -2138009590; (*Record size is not correct during reading event data*)
 	ERR_ASSET_READ_CRC : DINT := 100000; (*Record CRC error during reading event data*)
+	ERR_ASSET_READ_FILE_NAME : DINT := 100003; (*File name in event folder does not match the expected event#<index> pattern*)
 	ERR_ASSET_CONFIG : DINT := -1064239096; (*Configuration link is 0 pointer*)
 	ERR_ASSET_SHIFT_CALC : DINT := -1064239097; (*Invalid shift configured*)
 END_VAR
