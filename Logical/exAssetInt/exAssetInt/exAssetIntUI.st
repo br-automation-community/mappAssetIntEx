@@ -72,6 +72,9 @@ FUNCTION_BLOCK exAssetIntJobListUI
 			CreateLoggerEntry(exASSETINT_LOG_INFO, ADR('refresh job data'), Logger);
 			UIConnect.Status := exASSETINT_UI_STATUS_UPDATE;
 
+			// Reset scroll position, a filter/sort change can leave it beyond the new record count
+			Internal.RecordStart := 0;
+
 			// Generate job data
 			Internal.RecordCount := exAssetIntBufferUI(exLink.MemoryJob, exLink, UISetup.SortingStartTime, UIConnect.Filter, RecordTypeJob);
 			
@@ -196,6 +199,9 @@ FUNCTION_BLOCK exAssetIntShiftListUI
 			// Set status
 			CreateLoggerEntry(exASSETINT_LOG_INFO, ADR('refresh shift data'), Logger);
 			UIConnect.Status := exASSETINT_UI_STATUS_UPDATE;
+
+			// Reset scroll position, a filter/sort change can leave it beyond the new record count
+			Internal.RecordStart := 0;
 
 			// Generate shift data
 			Internal.RecordCount := exAssetIntBufferUI(exLink.MemoryShift, exLink, UISetup.SortingStartTime, UIConnect.Filter, RecordTypeShift);
@@ -322,6 +328,9 @@ FUNCTION_BLOCK exAssetIntTimelineUI
 			// Set status
 			CreateLoggerEntry(exASSETINT_LOG_INFO, ADR('refresh timeline data'), Logger);
 			UIConnect.Status := exASSETINT_UI_STATUS_UPDATE;
+
+			// Reset scroll position, a filter/sort change can leave it beyond the new record count
+			Internal.RecordStart := 0;
 
 			// Generate timeline data
 			Internal.RecordCount := exAssetIntBufferUI(exLink.MemoryTimeline, exLink, UISetup.SortingStartTime, UIConnect.Filter, RecordTypeTimeline);
