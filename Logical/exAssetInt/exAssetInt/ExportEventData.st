@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------------------------
-// File version 1004
+// File version 1005
 // -------------------------------------------------------------------------------------------
 // Read event data
 // -------------------------------------------------------------------------------------------
@@ -72,7 +72,7 @@ FUNCTION_BLOCK ExportEventData
 			// -------------------------------------------------------------------------------------------
 			// Export timeline
 			IF ExportType = ExportTypeTimeline THEN
-				IF Configuration.JobStatistics THEN
+				IF Configuration.Timeline THEN
 					FileName := Configuration.TimelineFileNamePattern;
 				ELSE
 					State := 0;
