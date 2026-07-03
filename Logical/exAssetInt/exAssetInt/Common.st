@@ -3,6 +3,9 @@
 // -------------------------------------------------------------------------------------------
 // Is second string in first string																		
 FUNCTION FindInstr
+	// Set up start value, function return value is not initialized
+	FindInstr := 0;
+
 	IF (brsstrlen(string1) >= brsstrlen(string2)) THEN
 		FOR idx:=0 TO brsstrlen(string1) - brsstrlen(string2) DO
 			IF (brsmemcmp(string1 + idx, string2, brsstrlen(string2)) = 0) THEN
@@ -16,6 +19,9 @@ END_FUNCTION
 // -------------------------------------------------------------------------------------------
 // Generate crc																	
 FUNCTION CalcCrc
+	// Set up start value, function return value is not initialized
+	CalcCrc := 0;
+
 	FOR idx:=1 TO length - 1 DO
 		brsmemcpy(ADR(_byte), data+idx, 1);
 		CalcCrc := CalcCrc + _byte;

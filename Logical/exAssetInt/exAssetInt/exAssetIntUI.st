@@ -393,6 +393,10 @@ END_FUNCTION_BLOCK
 // -------------------------------------------------------------------------------------------
 // Generate buffer data for job, shift or timeline
 FUNCTION exAssetIntBufferUI
+	// Set up start values, function locals are not initialized
+	RecordCount := 0;
+	y := 0;
+
 	brsmemset(Memory, 0, CORE_EVENT_NUM_MAX*SIZEOF(RecordData));
 	IF exLink.RecordCount > 0 THEN
 		REPEAT
