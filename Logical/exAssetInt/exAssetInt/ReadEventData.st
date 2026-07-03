@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------------------------
-// File version 1003
+// File version 1004
 // -------------------------------------------------------------------------------------------
 // Read event data
 // -------------------------------------------------------------------------------------------
@@ -183,17 +183,23 @@ FUNCTION_BLOCK ReadEventData
 						CreateLoggerEntry(exASSETINT_LOG_ERROR, ADR(TmpStr1), Logger);
 						StatusRead := ERR_ASSET_READ_CRC;
 					ELSE
-						// Insert record
-						InsertEventData(Memory, RecordCount, RecordData);
-						
 						// Remember file name index is used, ignore indexes outside the array
 						brsstrcpy(ADR(TmpStr1), ADR(FileName) + FindInstr(ADR(FileName), ADR('#')) + 1);
 						FileIndex := DINT_TO_UINT(brsatoi(ADR(TmpStr1)));
 						IF FileIndex <= CORE_EVENT_NUM_MAX THEN
 							RecordIndexUsed[FileIndex] := TRUE;
 						END_IF
-						
-						RecordCount := RecordCount + 1;
+
+						// Insert record, never write past the allocated record buffer
+						IF RecordCount < CORE_EVENT_NUM_MAX THEN
+							InsertEventData(Memory, RecordCount, RecordData);
+							RecordCount := RecordCount + 1;
+						ELSE
+							TmpStr1 := 'ERR: more event files than record buffer capacity, skipping > ';
+							brsstrcat(ADR(TmpStr1), ADR(FileName));
+							CreateLoggerEntry(exASSETINT_LOG_ERROR, ADR(TmpStr1), Logger);
+							StatusRead := ERR_ASSET_READ_BUFFER_FULL;
+						END_IF
 					END_IF
 					
 					State := 6;
