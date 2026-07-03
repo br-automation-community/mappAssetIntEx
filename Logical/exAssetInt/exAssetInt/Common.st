@@ -48,29 +48,30 @@ FUNCTION CreateLoggerEntry
 	IF LogBuffer = 0 THEN
 		RETURN;		
 	END_IF	
-	// Make sure log message fits
+	// Make sure log message fits, use a local buffer so the caller's message memory is never overwritten
 	IF brsstrlen(LogMsg) > LOG_LEN - 20 THEN
-		brsstrcpy(LogMsg, ADR('*** log meassage exceeds maximum length ***'));
-		RETURN;
+		brsstrcpy(ADR(TmpMsg), ADR('*** log meassage exceeds maximum length ***'));
+		LogMsg := ADR(TmpMsg);
 	END_IF
-	// Check previous message
+	// Check previous message, function locals are not initialized
 	IF brsstrlen(LogBuffer) > 19 THEN
 		brsstrcpy(ADR(LastMsg), LogBuffer + 19);
+	ELSE
+		brsstrcpy(ADR(LastMsg), ADR(''));
 	END_IF
 
 	// Make sure we dont flood Logger
 	IF brsstrcmp(LogMsg, ADR(LastMsg)) <> 0 AND LogLevel <= LOG_LEVEL AND LogBuffer <> 0 THEN
-		// Move ring buffer around
-		brsmemmove(LogBuffer+LOG_LEN+1, LogBuffer, LOG_LEN*(LOG_NUM-1));
+		// Move ring buffer around, stride is LOG_LEN+1 since STRING[LOG_LEN] occupies LOG_LEN+1 bytes
+		brsmemmove(LogBuffer+LOG_LEN+1, LogBuffer, (LOG_LEN+1)*(LOG_NUM-1));
 		brsstrcpy(LogBuffer, ADR(''));
 		// Create time information
-		RTC_gettime(ADR(RtcGettime)); 
+		RTC_gettime(ADR(RtcGettime));
 		IF(RtcGettime.day < 10) THEN
 			brsstrcat(LogBuffer, ADR('0'));
 		END_IF
 		brsitoa(RtcGettime.day, ADR(TmpStr));
 		brsstrcat(LogBuffer, ADR(TmpStr));
-		brsitoa(RtcGettime.day, ADR(TmpStr));
 		brsstrcat(LogBuffer, ADR('.'));
 		IF(RtcGettime.month < 10) THEN
 			brsstrcat(LogBuffer, ADR('0'));
