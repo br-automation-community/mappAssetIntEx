@@ -50,21 +50,29 @@ FUNCTION CalcStatsJob
 
 	// -------------------------------------------------------------------------------------------
 	// Additional times and rates
-	NominalProductionTime := REAL_TO_UDINT(UDINT_TO_REAL(exLink.JobStatistics.TotalPieces)*(3600/Parameter.NominalProductionRate));
+	IF Parameter.NominalProductionRate > 0.0 THEN
+		NominalProductionTime := REAL_TO_UDINT(UDINT_TO_REAL(exLink.JobStatistics.TotalPieces)*(3600/Parameter.NominalProductionRate));
+	ELSE
+		NominalProductionTime := 0;
+	END_IF
 	exLink.JobStatistics.NominalProductionTime.Hours := NominalProductionTime/3600;
 	exLink.JobStatistics.NominalProductionTime.Minutes := UDINT_TO_USINT((NominalProductionTime - exLink.JobStatistics.NominalProductionTime.Hours*3600)/60);
 	exLink.JobStatistics.NominalProductionTime.Seconds := UDINT_TO_USINT(NominalProductionTime - exLink.JobStatistics.NominalProductionTime.Hours*3600 - exLink.JobStatistics.NominalProductionTime.Minutes*60);
-	
-	GoodProductionTime := REAL_TO_UDINT(UDINT_TO_REAL(exLink.JobStatistics.GoodPieces)*(3600/Parameter.NominalProductionRate));
+
+	IF Parameter.NominalProductionRate > 0.0 THEN
+		GoodProductionTime := REAL_TO_UDINT(UDINT_TO_REAL(exLink.JobStatistics.GoodPieces)*(3600/Parameter.NominalProductionRate));
+	ELSE
+		GoodProductionTime := 0;
+	END_IF
 	exLink.JobStatistics.GoodProductionTime.Hours := GoodProductionTime/3600;
 	exLink.JobStatistics.GoodProductionTime.Minutes := UDINT_TO_USINT((GoodProductionTime - exLink.JobStatistics.GoodProductionTime.Hours*3600)/60);
 	exLink.JobStatistics.GoodProductionTime.Seconds := UDINT_TO_USINT(GoodProductionTime - exLink.JobStatistics.GoodProductionTime.Hours*3600 - exLink.JobStatistics.GoodProductionTime.Minutes*60);
 	
 	IF exLink.JobDowntimeScheduled > 0 AND JobTotalTime > 0 THEN
-		exLink.JobStatistics.ScheduledDowntimeRate := UDINT_TO_REAL(exLink.JobDowntimeScheduled/JobTotalTime)/1000;
+		exLink.JobStatistics.ScheduledDowntimeRate := UDINT_TO_REAL(exLink.JobDowntimeScheduled)/UDINT_TO_REAL(JobTotalTime)/1000;
 	END_IF
 	IF exLink.JobDowntimeUnscheduled > 0 AND JobTotalTime > 0 THEN
-		exLink.JobStatistics.UnscheduledDowntimeRate := UDINT_TO_REAL(exLink.JobDowntimeUnscheduled/JobTotalTime)/1000;
+		exLink.JobStatistics.UnscheduledDowntimeRate := UDINT_TO_REAL(exLink.JobDowntimeUnscheduled)/UDINT_TO_REAL(JobTotalTime)/1000;
 	END_IF
 	IF Uptime > 0 THEN
 		exLink.JobStatistics.NominalProductionTimeRate := UDINT_TO_REAL(NominalProductionTime)/UDINT_TO_REAL(Uptime);
@@ -128,21 +136,29 @@ FUNCTION CalcStatsShift
 
 	// -------------------------------------------------------------------------------------------
 	// Additional times and rates
-	NominalProductionTime := REAL_TO_UDINT(UDINT_TO_REAL(exLink.ShiftStatistics.TotalPieces)*(3600/Parameter.NominalProductionRate));
+	IF Parameter.NominalProductionRate > 0.0 THEN
+		NominalProductionTime := REAL_TO_UDINT(UDINT_TO_REAL(exLink.ShiftStatistics.TotalPieces)*(3600/Parameter.NominalProductionRate));
+	ELSE
+		NominalProductionTime := 0;
+	END_IF
 	exLink.ShiftStatistics.NominalProductionTime.Hours := NominalProductionTime/3600;
 	exLink.ShiftStatistics.NominalProductionTime.Minutes := UDINT_TO_USINT((NominalProductionTime - exLink.ShiftStatistics.NominalProductionTime.Hours*3600)/60);
 	exLink.ShiftStatistics.NominalProductionTime.Seconds := UDINT_TO_USINT(NominalProductionTime - exLink.ShiftStatistics.NominalProductionTime.Hours*3600 - exLink.ShiftStatistics.NominalProductionTime.Minutes*60);
-	
-	GoodProductionTime := REAL_TO_UDINT(UDINT_TO_REAL(exLink.ShiftStatistics.GoodPieces)*(3600/Parameter.NominalProductionRate));
+
+	IF Parameter.NominalProductionRate > 0.0 THEN
+		GoodProductionTime := REAL_TO_UDINT(UDINT_TO_REAL(exLink.ShiftStatistics.GoodPieces)*(3600/Parameter.NominalProductionRate));
+	ELSE
+		GoodProductionTime := 0;
+	END_IF
 	exLink.ShiftStatistics.GoodProductionTime.Hours := GoodProductionTime/3600;
 	exLink.ShiftStatistics.GoodProductionTime.Minutes := UDINT_TO_USINT((GoodProductionTime - exLink.ShiftStatistics.GoodProductionTime.Hours*3600)/60);
 	exLink.ShiftStatistics.GoodProductionTime.Seconds := UDINT_TO_USINT(GoodProductionTime - exLink.ShiftStatistics.GoodProductionTime.Hours*3600 - exLink.ShiftStatistics.GoodProductionTime.Minutes*60);
 	
 	IF exLink.ShiftDowntimeScheduled > 0 AND ShiftTotalTime > 0 THEN
-		exLink.ShiftStatistics.ScheduledDowntimeRate := UDINT_TO_REAL(exLink.ShiftDowntimeScheduled/ShiftTotalTime)/1000;
+		exLink.ShiftStatistics.ScheduledDowntimeRate := UDINT_TO_REAL(exLink.ShiftDowntimeScheduled)/UDINT_TO_REAL(ShiftTotalTime)/1000;
 	END_IF
 	IF exLink.ShiftDowntimeUnscheduled > 0 AND ShiftTotalTime > 0 THEN
-		exLink.ShiftStatistics.UnscheduledDowntimeRate := UDINT_TO_REAL(exLink.ShiftDowntimeUnscheduled/ShiftTotalTime)/1000;
+		exLink.ShiftStatistics.UnscheduledDowntimeRate := UDINT_TO_REAL(exLink.ShiftDowntimeUnscheduled)/UDINT_TO_REAL(ShiftTotalTime)/1000;
 	END_IF
 	IF Uptime > 0 THEN
 		exLink.ShiftStatistics.NominalProductionTimeRate := UDINT_TO_REAL(NominalProductionTime)/UDINT_TO_REAL(Uptime);
