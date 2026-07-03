@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------------------------
-// File version 1001
+// File version 1002
 // -------------------------------------------------------------------------------------------
 // Read event data
 // -------------------------------------------------------------------------------------------
@@ -472,6 +472,11 @@ END_FUNCTION
 // Add additional 0 when value is < 10																	
 // -------------------------------------------------------------------------------------------
 FUNCTION NormalizeDateTime
+	// Zero the LREAL return value first so the string copied below is always null terminated,
+	// otherwise brsstrlen on the caller side (ReplaceDateTime/ReplaceString) can run past the
+	// 8 byte return value into adjacent memory
+	brsmemset(ADR(NormalizeDateTime), 0, SIZEOF(NormalizeDateTime));
+
 	IF(value < 10) THEN
 		TmpStr1 := '0';
 	ELSE
