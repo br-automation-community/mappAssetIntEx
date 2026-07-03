@@ -186,10 +186,10 @@ FUNCTION_BLOCK exAssetIntShiftListUI
 			Internal.SortingStartTimeOld := UISetup.SortingStartTime;
 			
 			// Handle page up and down
-			Internal.State := exAssetIntScrollListUI(Internal.RecordCount, UI_TIMELINE_IDX + 1, ADR(UIConnect.Output.PageUp), ADR(UIConnect.Output.PageDown), ADR(UIConnect.Output.StepUp), ADR(UIConnect.Output.StepDown), ADR(Internal.RecordStart), ADR(UIConnect.Output.RangeStart), ADR(UIConnect.Output.RangeEnd), Internal.State);
-				
+			Internal.State := exAssetIntScrollListUI(Internal.RecordCount, UI_SHIFT_LIST_IDX + 1, ADR(UIConnect.Output.PageUp), ADR(UIConnect.Output.PageDown), ADR(UIConnect.Output.StepUp), ADR(UIConnect.Output.StepDown), ADR(Internal.RecordStart), ADR(UIConnect.Output.RangeStart), ADR(UIConnect.Output.RangeEnd), Internal.State);
+
 			// Wait for core task to call update command
-			IF exLink.RefreshShiftUI AND exLink.RecordCount > 0 THEN			
+			IF exLink.RefreshShiftUI AND exLink.RecordCount > 0 THEN
 				Internal.State := exASSETINT_STATE_UI_BUFFER;					
 			END_IF
 			
@@ -528,9 +528,9 @@ FUNCTION exAssetIntScrollListUI
 	
 	// -------------------------------------------------------------------------------------------
 	// Calculate range start
-	IF UINT_TO_REAL(UI_TIMELINE_IDX + 1) / UINT_TO_REAL(RecordCount) < 1 THEN
+	IF UINT_TO_REAL(ListMaxCount) / UINT_TO_REAL(RecordCount) < 1 THEN
 		RangeStart := 100 - (DINT_TO_REAL(RecordStart) / UINT_TO_REAL(RecordCount)) * 100.0;
-		RangeEnd := RangeStart - (UINT_TO_REAL(UI_TIMELINE_IDX + 1) / UINT_TO_REAL(RecordCount)) * 100.0; 
+		RangeEnd := RangeStart - (UINT_TO_REAL(ListMaxCount) / UINT_TO_REAL(RecordCount)) * 100.0;
 	ELSE
 		RangeStart := 0;
 		RangeEnd := 100;
