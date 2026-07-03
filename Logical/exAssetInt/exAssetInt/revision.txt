@@ -2,6 +2,7 @@ Version 1.4
 - Fix uninitialized function locals: exAssetIntBufferUI (RecordCount, y) wrote with undefined offset into the UI buffer memory (memory corruption)
 - Fix uninitialized function return values in FindInstr and CalcCrc
 - Fix out of bounds write to RecordIndexUsed: index parsed from event file name was used without range check (ReadEventData and core store event)
+- Reject files in the event folder that do not match the 'event#<index>' name pattern before opening them, log an error instead of processing them
 
 Version 1.3
 - Fix division by zero when record number is 0
