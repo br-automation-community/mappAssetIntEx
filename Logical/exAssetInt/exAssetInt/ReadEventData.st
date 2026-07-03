@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------------------------
-// File version 1001
+// File version 1002
 // -------------------------------------------------------------------------------------------
 // Read event data
 // -------------------------------------------------------------------------------------------
@@ -186,10 +186,12 @@ FUNCTION_BLOCK ReadEventData
 						// Insert record
 						InsertEventData(Memory, RecordCount, RecordData);
 						
-						// Remember file name index is used
+						// Remember file name index is used, ignore indexes outside the array
 						brsstrcpy(ADR(TmpStr1), ADR(FileName) + FindInstr(ADR(FileName), ADR('#')) + 1);
 						FileIndex := DINT_TO_UINT(brsatoi(ADR(TmpStr1)));
-						RecordIndexUsed[FileIndex] := TRUE;
+						IF FileIndex <= CORE_EVENT_NUM_MAX THEN
+							RecordIndexUsed[FileIndex] := TRUE;
+						END_IF
 						
 						RecordCount := RecordCount + 1;
 					END_IF

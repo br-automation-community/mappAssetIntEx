@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------------------------
-// File version 1012
+// File version 1013
 // -------------------------------------------------------------------------------------------
 // Core function block
 FUNCTION_BLOCK exAssetIntCore
@@ -517,6 +517,10 @@ FUNCTION_BLOCK exAssetIntCore
 				brsmemcpy(ADR(Internal.TmpStr1), exLink.MemoryDb + (exLink.RecordCount - 1)*SIZEOF(Internal.RecordData) +  1, SIZEOF(Internal.RecordData.FileName));
 				brsstrcpy(ADR(Internal.TmpStr1), ADR(Internal.TmpStr1) + FindInstr(ADR(Internal.TmpStr1), ADR('#')) + 1);
 				Internal.RecordIndex := DINT_TO_UINT(brsatoi(ADR(Internal.TmpStr1)));
+				// Make sure parsed index stays within RecordIndexUsed
+				IF Internal.RecordIndex > CORE_EVENT_NUM_MAX THEN
+					Internal.RecordIndex := CORE_EVENT_NUM_MAX;
+				END_IF
 			END_IF
 			
 			Internal.WriteEventData.Enable := TRUE;
