@@ -19,9 +19,7 @@ VAR
 	AutoCreateJobs : BOOL; (*Auto create jobs*)
 	AutoCreatePieceCnt : UDINT; (*Job piece counter*)
 	AutoCreateJobsCnt : UDINT; (*Job name counter*)
-END_VAR
-VAR CONSTANT
-	AutoCreateJobsNum : UDINT := 30; (*Pieces per job auto create*)
+	AutoCreateJobsNum : {REDUND_UNREPLICABLE} UDINT := 30; (*Pieces per job auto create*)
 END_VAR
 (*.-.-.-.-.---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*)
 VAR
