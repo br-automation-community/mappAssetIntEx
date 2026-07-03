@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<?AutomationStudio WorkingVersion="6.3" FileVersion="4.9"?>
+<?AutomationStudio WorkingVersion="6.7" FileVersion="4.9"?>
 <Hardware xmlns="http://br-automation.co.at/AS/Hardware">
-  <Module Name="X20CP3687X" Type="X20CP3687X" Version="1.8.2.0">
+  <Module Name="X20CP3687X" Type="X20CP3687X" Version="1.10.0.0">
     <Connector Name="IF2">
       <Parameter ID="ActivateDevice" Value="1" />
       <Group ID="Vnc1" />
@@ -16,7 +16,6 @@
     </Connector>
     <Parameter ID="ConfigurationID" Value="MappAssetInt_X20CP1583" />
     <Parameter ID="UserPartitionSize" Value="16" />
-    <Parameter ID="Simulation" Value="1" />
     <Parameter ID="UserRamSize" Value="731936" />
     <Parameter ID="RemMemSize" Value="300000" />
     <Parameter ID="TimerDeviceType" Value="EPLX2X" />

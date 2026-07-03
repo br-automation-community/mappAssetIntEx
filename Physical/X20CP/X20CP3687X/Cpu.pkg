@@ -17,7 +17,7 @@
     <Object Type="Package">VC</Object>
   </Objects>
   <Configuration ModuleId="X20CP3687X">
-    <AutomationRuntime Version="6.4.2" />
+    <AutomationRuntime Version="6.7.6" />
     <Build GccVersion="11.3.0" />
     <DefaultTargetMemory Tasks="UserROM" />
     <Safety SafetyRelease="0.0" />

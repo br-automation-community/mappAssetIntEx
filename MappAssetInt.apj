@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<?AutomationStudio Version="6.5.0.241" WorkingVersion="6.3"?>
+<?AutomationStudio Version="6.7.0.187" WorkingVersion="6.7"?>
 <Project Version="1.0.0" Edition="Standard" EditionComment="Standard" xmlns="http://br-automation.co.at/AS/Project">
   <Communication />
   <ANSIC DefaultIncludes="true" />
@@ -8,6 +8,6 @@
   <Project StoreRuntimeInProject="true" />
   <Variables DefaultInitValue="0" DefaultRetain="false" DefaultVolatile="true" />
   <TechnologyPackages>
-    <OpcUaCs Version="6.4.0" />
+    <OpcUaCs Version="6.7.0" />
   </TechnologyPackages>
 </Project>
