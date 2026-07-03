@@ -1,6 +1,6 @@
 /* Automation Studio generated header file */
 /* Do not edit ! */
-/* MpAssetInt 5.24.2 */
+/* MpAssetInt 5.24.6 */
 
 #ifndef _MPASSETINT_
 #define _MPASSETINT_
@@ -9,7 +9,7 @@ extern "C"
 {
 #endif
 #ifndef _MpAssetInt_VERSION
-#define _MpAssetInt_VERSION 5.24.2
+#define _MpAssetInt_VERSION 5.24.6
 #endif
 
 #include <bur/plctypes.h>
@@ -18,18 +18,18 @@ extern "C"
 #define _BUR_PUBLIC
 #endif
 #ifdef _SG3
-		#include "MpBase.h"
 		#include "sys_lib.h"
+		#include "MpBase.h"
 #endif
 
 #ifdef _SG4
-		#include "MpBase.h"
 		#include "sys_lib.h"
+		#include "MpBase.h"
 #endif
 
 #ifdef _SGC
-		#include "MpBase.h"
 		#include "sys_lib.h"
+		#include "MpBase.h"
 #endif
 
 

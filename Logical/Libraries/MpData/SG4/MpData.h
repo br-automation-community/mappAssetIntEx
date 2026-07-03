@@ -1,6 +1,6 @@
 /* Automation Studio generated header file */
 /* Do not edit ! */
-/* MpData 5.24.2 */
+/* MpData 5.24.6 */
 
 #ifndef _MPDATA_
 #define _MPDATA_
@@ -9,7 +9,7 @@ extern "C"
 {
 #endif
 #ifndef _MpData_VERSION
-#define _MpData_VERSION 5.24.2
+#define _MpData_VERSION 5.24.6
 #endif
 
 #include <bur/plctypes.h>
@@ -18,30 +18,30 @@ extern "C"
 #define _BUR_PUBLIC
 #endif
 #ifdef _SG3
-		#include "MpBase.h"
 		#include "astime.h"
 		#include "sys_lib.h"
 		#include "brsystem.h"
 		#include "FileIO.h"
 		#include "DataObj.h"
+		#include "MpBase.h"
 #endif
 
 #ifdef _SG4
-		#include "MpBase.h"
 		#include "astime.h"
 		#include "sys_lib.h"
 		#include "brsystem.h"
 		#include "FileIO.h"
 		#include "DataObj.h"
+		#include "MpBase.h"
 #endif
 
 #ifdef _SGC
-		#include "MpBase.h"
 		#include "astime.h"
 		#include "sys_lib.h"
 		#include "brsystem.h"
 		#include "FileIO.h"
 		#include "DataObj.h"
+		#include "MpBase.h"
 #endif
 
 
