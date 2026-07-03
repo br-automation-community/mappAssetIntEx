@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------------------------
-// File version 1006
+// File version 1007
 // -------------------------------------------------------------------------------------------
 // Job UI function block
 FUNCTION_BLOCK exAssetIntJobListUI
@@ -502,7 +502,10 @@ FUNCTION exAssetIntScrollListUI
 	// -------------------------------------------------------------------------------------------
 	// Correction for step/page up/down
 	IF RecordStart + ListMaxCount > UDINT_TO_DINT(RecordCount) THEN
-		RecordStart := RecordCount - ListMaxCount;
+		// Subtract as DINT: RecordCount and ListMaxCount are both UINT, a plain UINT
+		// subtraction would wrap around to a large positive value when RecordCount < ListMaxCount,
+		// which the RecordStart < 0 check below would not catch
+		RecordStart := UINT_TO_DINT(RecordCount) - UINT_TO_DINT(ListMaxCount);
 	END_IF
 	IF RecordStart < 0 THEN
 		RecordStart := 0;
