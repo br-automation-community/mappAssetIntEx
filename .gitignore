@@ -23,6 +23,10 @@
 /*.isopen
 # Ignore debug logs
 /debug.log
+
+/.claude
+/.github
+CLAUDE.md
  
 # Ignore .zip files, for the moment
 *.zip
