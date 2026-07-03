@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------------------------
-// File version 1001
+// File version 1002
 // -------------------------------------------------------------------------------------------
 // Read configuration
 // -------------------------------------------------------------------------------------------
@@ -42,17 +42,25 @@ FUNCTION_BLOCK ReadConfiguration
 	
 			// File opened successful
 			IF FileOpen_0.status = ERR_OK THEN
-				// Generate log entry
-				CreateLoggerEntry(exASSETINT_LOG_ALL, ADR('open configuration ok'), Logger);
-				
-				// Go to next step
-				State := 5;
+				// Make sure data has correct size
+				IF FileOpen_0.filelen <> SIZEOF(Configuration) THEN
+					CreateLoggerEntry(exASSETINT_LOG_ERROR, ADR('configuration data has wrong size'), Logger);
+					Status := ERR_ASSET_CONFIG_SIZE;
+
+					State := 6;
+				ELSE
+					// Generate log entry
+					CreateLoggerEntry(exASSETINT_LOG_ALL, ADR('open configuration ok'), Logger);
+
+					// Go to next step
+					State := 5;
+				END_IF
 
 			// Error
 			ELSIF FileOpen_0.status <> ERR_FUB_BUSY THEN
 				Status := FileOpen_0.status;
 				State := 0;
-			END_IF	
+			END_IF
 		
 		// -------------------------------------------------------------------------------------------
 		// Read configuration data
@@ -87,9 +95,11 @@ FUNCTION_BLOCK ReadConfiguration
 			IF FileClose_0.status = ERR_OK THEN
 				// Generate log entry
 				CreateLoggerEntry(exASSETINT_LOG_ALL, ADR('close configuration ok'), Logger);
-				
-				// Go to next step
-				Status := ERR_OK;
+
+				// Keep a previous error (e.g. wrong file size), else finish successfully
+				IF Status = ERR_FUB_BUSY THEN
+					Status := ERR_OK;
+				END_IF
 				State := 0;
 				
 				// Error
