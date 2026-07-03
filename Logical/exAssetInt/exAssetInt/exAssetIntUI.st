@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------------------------
-// File version 1007
+// File version 1008
 // -------------------------------------------------------------------------------------------
 // Job UI function block
 FUNCTION_BLOCK exAssetIntJobListUI
@@ -328,15 +328,21 @@ FUNCTION_BLOCK exAssetIntTimelineUI
 			
 			// Generate bar graph data
 			Internal.TimeLongest := 0;
-			FOR Internal.x := 0 TO Internal.RecordCount DO
-				brsmemcpy(ADR(Internal.RecordData), exLink.MemoryTimeline + (Internal.x + Internal.RecordStart)*SIZEOF(Internal.RecordData), SIZEOF(Internal.RecordData));
-				
-				Internal.TimeSeconds := Internal.RecordData.TotalTime.Hours*60*60 + Internal.RecordData.TotalTime.Minutes*60 + Internal.RecordData.TotalTime.Seconds;
-				
-				IF Internal.TimeSeconds > Internal.TimeLongest THEN
-					Internal.TimeLongest := Internal.TimeSeconds;
-				END_IF
-			END_FOR
+			IF Internal.RecordCount > 0 THEN
+				FOR Internal.x := 0 TO UI_TIMELINE_IDX DO
+					IF Internal.x + Internal.RecordStart >= Internal.RecordCount THEN
+						EXIT;
+					END_IF
+
+					brsmemcpy(ADR(Internal.RecordData), exLink.MemoryTimeline + (Internal.x + Internal.RecordStart)*SIZEOF(Internal.RecordData), SIZEOF(Internal.RecordData));
+
+					Internal.TimeSeconds := Internal.RecordData.TotalTime.Hours*60*60 + Internal.RecordData.TotalTime.Minutes*60 + Internal.RecordData.TotalTime.Seconds;
+
+					IF Internal.TimeSeconds > Internal.TimeLongest THEN
+						Internal.TimeLongest := Internal.TimeSeconds;
+					END_IF
+				END_FOR
+			END_IF
 			
 			Internal.State := exASSETINT_STATE_UI_DATA;	
 
