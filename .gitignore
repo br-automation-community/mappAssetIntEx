@@ -23,6 +23,11 @@
 /*.isopen
 # Ignore debug logs
 /debug.log
+
+/.claude
+/.github
+/.vscode
+
  
 # Ignore .zip files, for the moment
 *.zip
@@ -35,3 +40,4 @@
 *.PVM
 
 mkdocs/
+CLAUDE.md
