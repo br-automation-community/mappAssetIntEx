@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------------------------
-// File version 1002
+// File version 1003
 // -------------------------------------------------------------------------------------------
 // Calculate current job statistics
 FUNCTION CalcStatsJob
@@ -29,6 +29,7 @@ FUNCTION CalcStatsJob
 	END_IF
 	
 	// Calculate uptime
+	Uptime := 0;
 	IF Downtime = exASSETINT_NO_DOWNTIME THEN
 		Uptime := JobTotalTime - exLink.JobDowntimeScheduled/1000 - exLink.JobDowntimeUnscheduled/1000;
 		exLink.JobStatistics.Uptime.Hours := Uptime/3600;
@@ -114,6 +115,7 @@ FUNCTION CalcStatsShift
 	END_IF
 	
 	// Calculate uptime
+	Uptime := 0;
 	IF Downtime = exASSETINT_NO_DOWNTIME THEN
 		Uptime := ShiftTotalTime - exLink.ShiftDowntimeScheduled/1000 - exLink.ShiftDowntimeUnscheduled/1000;
 		exLink.ShiftStatistics.Uptime.Hours := Uptime/3600;
