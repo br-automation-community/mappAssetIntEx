@@ -1,3 +1,11 @@
+#### 08.07.2026
+
+Version 1.6
+
+* Fix ExportEventData buffer overflow: FileName and TmpStr1 were declared as STRING[50], the same size as the filename/timestamp patterns; replacing the %Y placeholder expands the string by 2 bytes (2-char token replaced by 4-char year), causing brsmemmove in ReplaceString to write 2 bytes past the buffer end when the pattern is near maximum length; increased both buffers to STRING[54]
+* Fix uninitialized Uptime local in CalcStatsJob and CalcStatsShift: Uptime was only assigned inside the IF Downtime = NO_DOWNTIME block but used for NominalProductionTimeRate outside it; in B&R IEC functions locals are not initialized between calls, so during downtime the value was stack garbage; added explicit Uptime := 0 initialization before the conditional block
+* Fix off-by-one in CreateMemory module name generation: condition Cnt < 9 was checked after incrementing Cnt, so at Cnt=9 (previous digit was single-digit 8) two characters were removed instead of one, corrupting the base name (e.g. AsDb_8 became AsDb9 instead of AsDb_9); changed condition to Cnt < 10
+
 #### 03.07.2026
 
 Version 1.5
