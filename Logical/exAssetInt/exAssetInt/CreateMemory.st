@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------------------------
-// File version 1000
+// File version 1001
 // ------------------------------------------------------------------------------------------- 
 // Create internal memory 
 // ------------------------------------------------------------------------------------------- 
@@ -102,7 +102,7 @@ FUNCTION_BLOCK CreateMemory
 				 
 				// Increase module number, generate new module name 
 				Cnt := Cnt + 1; 
-				IF Cnt < 9 THEN 
+				IF Cnt < 10 THEN 
 					brsmemset(ADR(TmpStr1) + brsstrlen(ADR(TmpStr1)) - 1, 0, 1); 
 				ELSE 
 					brsmemset(ADR(TmpStr1) + brsstrlen(ADR(TmpStr1)) - 2, 0, 2); 
