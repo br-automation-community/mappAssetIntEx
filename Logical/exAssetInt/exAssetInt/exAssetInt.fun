@@ -1,4 +1,4 @@
-(*File Version 1005*)
+(*File Version 1006*)
 (*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*)
 
 FUNCTION_BLOCK exAssetIntCore (*mapp function block which can be used for asset intensity calculation.*) (* $GROUP=mapp Services,$CAT=Asset Intensity,$GROUPICON=Icon_mapp.png,$CATICON=Icon_exOee.png *)
@@ -320,8 +320,8 @@ FUNCTION_BLOCK ExportEventData
 		RtcGettime : {REDUND_UNREPLICABLE} RTCtime_typ;
 		RecordDataIntern : exCoreInternalRecordType;
 		DTStructure_0 : DTStructure;
-		FileName : STRING[50];
-		TmpStr1 : STRING[50];
+		FileName : STRING[54]; (*+4 bytes to absorb %Y expansion from 2 to 4 chars*)
+		TmpStr1 : STRING[54]; (*+4 bytes to absorb %Y expansion from 2 to 4 chars*)
 		TmpStr2 : STRING[50];
 		lrealStr : {REDUND_UNREPLICABLE} LREAL;
 		Buffer : STRING[EXPORT_BUFFER];
